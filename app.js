@@ -5,9 +5,14 @@ let ul = document.querySelector("ul");
 addbtn.addEventListener("click", () => {
   let text = input.value;
   let task = creatTask(text);
-  task.innerHTML+='<span class="closebtn"><i class="fa-solid fa-trash"></i></span>';
+  task.innerHTML +=
+    '<span class="closebtn"><i class="fa-solid fa-trash"></i></span>';
   ul.appendChild(task);
   input.value = "";
+});
+
+ul.addEventListener("click", (e) => {
+  console.log(e.target)
 });
 
 function creatTask(text) {
