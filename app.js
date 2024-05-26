@@ -1,18 +1,25 @@
 let addbtn = document.querySelector("button");
 let input = document.querySelector("input");
-let ul = document.querySelector("ul");
+let taskList = document.querySelector("ul");
 
 addbtn.addEventListener("click", () => {
-  let text = input.value;
-  let task = creatTask(text);
-  task.innerHTML +=
-    '<span class="closebtn"><i class="fa-solid fa-trash"></i></span>';
-  ul.appendChild(task);
-  input.value = "";
+  if (input.value != "") {
+    let text = input.value;
+    let task = creatTask(text);
+    task.innerHTML +=
+      '<span class="closebtn"><i class="fa-solid fa-trash"></i></span>';
+    taskList.appendChild(task);
+    input.value = "";
+  }
 });
 
-ul.addEventListener("click", (e) => {
-  console.log(e.target)
+taskList.addEventListener("click", (e) => {
+  if (e.target.nodeName === "I") {
+    e.target.parentElement.parentElement.style = "display:none";
+  }
+  if (e.target.nodeName === "LI") {
+    e.target.classList.toggle("done");
+  }
 });
 
 function creatTask(text) {
@@ -20,3 +27,5 @@ function creatTask(text) {
   li.textContent = text;
   return li;
 }
+
+console.log(localStorage.setItem('text','text'))
