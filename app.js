@@ -13,10 +13,8 @@ if (!localStorage.getItem("todo")) {
 addbtn.addEventListener("click", () => {
   if (input.value != "") {
     let text = input.value;
-    let task = creatTask(text);
-    task.innerHTML +=
-      '<span class="closebtn"><i class="fa-solid fa-trash"></i></span>';
-    taskList.appendChild(task);
+    creatTask(text);
+
 
     savetasks(text);
     input.value = "";
@@ -25,7 +23,11 @@ addbtn.addEventListener("click", () => {
 
 taskList.addEventListener("click", (e) => {
   if (e.target.nodeName === "I") {
-    e.target.parentElement.parentElement.style = "display:none";
+   let target= e.target.parentElement.parentElement;
+    target.style= "display:none";
+tasks.splice(tasks.indexOf(target.textContent),1);
+localStorage.setItem('todo',tasks);
+
   }
   if (e.target.nodeName === "LI") {
     e.target.classList.toggle("done");
@@ -35,6 +37,9 @@ taskList.addEventListener("click", (e) => {
 function creatTask(text) {
   let li = document.createElement("li");
   li.textContent = text;
+  li.innerHTML +=
+  '<span class="closebtn"><i class="fa-solid fa-trash"></i></span>';
+taskList.appendChild(li);
   return li;
 }
 
@@ -49,11 +54,20 @@ function gettasks() {
 
 function showtasks() {
   for (let itemtext of gettasks()) {
-    let task = creatTask(itemtext);
-    task.innerHTML +=
-      '<span class="closebtn"><i class="fa-solid fa-trash"></i></span>';
-    taskList.appendChild(task);
+   creatTask(itemtext);
   }
 }
 
 /* showtasks(); یا خط اولی که الان نوشتم انجام */
+
+
+
+let mytasls=['1','2','3'];
+let index = mytasls.indexOf('2')
+console.log(index)
+mytasls.splice(2,1);/* شماره2 و به انداره یک خانه */
+console.log(mytasls);
+
+
+
+
